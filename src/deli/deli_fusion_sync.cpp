@@ -196,6 +196,7 @@ public:
   int yolo_locker = 0;
   int deli_flag = 1;
   int sync_locker = 0;
+  int fake = 1;
 
   vector<double> CameraExtrinsic_vector;
   vector<double> CameraMat_vector;
@@ -236,7 +237,7 @@ public:
       "/Planning/deli_flag", 1,
       [this](const std_msgs::msg::Int16::SharedPtr msg) -> void
       {
-        this->deli_flag = msg->data;
+        this->fake = msg->data;
       });
 
     // 타이머 콜백으로 박스 매칭함수 실행

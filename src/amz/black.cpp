@@ -301,7 +301,8 @@ void ImageLiDARFusion::approximateSyncCallback(
     {
       for (int i = 0; i < lidar_msg->detections.size(); i++)
       {
-        if (lidar_msg->detections[i].bbox.size.y > 0.1 && lidar_msg->detections[i].bbox.size.y < 0.4 && lidar_msg->detections[i].bbox.size.z < 1)
+        // if (lidar_msg->detections[i].bbox.size.y > 0.1 && lidar_msg->detections[i].bbox.size.y < 0.4 && lidar_msg->detections[i].bbox.size.z < 1)
+        if (lidar_msg->detections[i].bbox.size.y > 0.03 && lidar_msg->detections[i].bbox.size.y < 0.4 && lidar_msg->detections[i].bbox.size.z < 1)
         {
           Box box =
           {
@@ -476,11 +477,11 @@ void ImageLiDARFusion::FusionCallback()
           coord_cloud->push_back(pointRGB);
         }
       }
-      // imshow
-      string windowName = "overlay";
-      cv::namedWindow(windowName, 3);
-      cv::imshow(windowName, image);
-      char ch = cv::waitKey(10);
+      // // imshow
+      // string windowName = "overlay";
+      // cv::namedWindow(windowName, 3);
+      // cv::imshow(windowName, image);
+      // char ch = cv::waitKey(10);
 
       // 플래닝으로 가는 데이터
       this->cone_pub_->publish(cone_msg);
